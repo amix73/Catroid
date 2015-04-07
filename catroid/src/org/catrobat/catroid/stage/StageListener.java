@@ -145,8 +145,6 @@ public class StageListener implements ApplicationListener {
 
 	private byte[] thumbnail;
 
-	public static String setdrawText = "";
-
 	StageListener() {
 	}
 
@@ -416,7 +414,6 @@ public class StageListener implements ApplicationListener {
 			drawText("Surface: " + width + " : " + height, -width / 2, height / 2, 2);
 			drawText("   ARDRONE", width / 6, height / 2-20, 1.5f);
 			drawText("SUPPORTED", width / 6, height / 2-50, 1.5f);
-			drawText(setdrawText, 0,0,2f);
 		}
 
 		//drawVideoOpenGL();
