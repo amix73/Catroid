@@ -26,10 +26,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -134,6 +137,20 @@ public class PreStageActivity extends BaseActivity {
 		}
 
 		if ((resources & Brick.ARDRONE_SUPPORT) > 0) {
+
+//			WifiManager mainWifiObj;
+//			mainWifiObj = (WifiManager) getSystemService(getBaseContext().WIFI_SERVICE);
+//
+//			Log.d("wifi before", Boolean.toString(mainWifiObj.isWifiEnabled()));
+//			if (!mainWifiObj.isWifiEnabled())
+//			{
+//				mainWifiObj.setWifiEnabled(true);
+//			}
+//			Log.d("wifi after", Boolean.toString(mainWifiObj.isWifiEnabled()));
+
+
+
+
 			droneInitializer = getDroneInitializer();
 			droneInitializer.initialise();
 		}
