@@ -43,6 +43,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.google.common.collect.Multimap;
@@ -703,10 +704,9 @@ public class StageListener implements ApplicationListener {
 		}
 	}
 
-	public void addActor (Look look)
+	public void addActor (Actor actor)
 	{
-		stage.addActor(look);
-
+		stage.addActor(actor);
 	}
 
 	public Stage getStage() {
