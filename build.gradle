@@ -119,7 +119,6 @@ android {
             res.srcDirs = ['catroid/res']
             assets.srcDirs = ['catroid/assets']
             jniLibs.srcDirs = ['catroid/jniLibs']
-            jni.srcDirs = [] //disable automatic ndk-build
         }
 
         androidTest {

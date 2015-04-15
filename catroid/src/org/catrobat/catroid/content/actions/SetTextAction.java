@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.formulaeditor.Formula;
 import org.catrobat.catroid.formulaeditor.InterpretationException;
+import org.catrobat.catroid.stage.DrawTextActor;
 import org.catrobat.catroid.stage.StageActivity;
 
 public class SetTextAction extends TemporalAction {
@@ -37,12 +38,17 @@ public class SetTextAction extends TemporalAction {
 	private Formula text;
 
 	private Sprite sprite;
+	private DrawTextActor actor;
 
 	@Override
 	protected void begin() {
 		try {
-			String str = text.interpretString(sprite);
-			StageActivity.stageListener.setdrawText = str;
+			String string = text.interpretString(sprite);
+			int posX = endX.interpretInteger(sprite);
+			int posY = endY.interpretInteger(sprite);
+
+			actor = new DrawTextActor(string, posX, posY);
+			StageActivity.stageListener.addActor(actor);
 		} catch (InterpretationException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +56,17 @@ public class SetTextAction extends TemporalAction {
 
 	@Override
 	protected void update(float percent) {
+		try {
+			String str = text.interpretString(sprite);
+			int posX = endX.interpretInteger(sprite);
+			int posY = endY.interpretInteger(sprite);
 
+		    actor.setText(str);
+			actor.setPosX(posX);
+			actor.setPosY(posY);
+		} catch (InterpretationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setDuration(Formula duration) {

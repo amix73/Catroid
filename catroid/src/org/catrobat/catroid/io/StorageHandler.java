@@ -23,9 +23,9 @@
 package org.catrobat.catroid.io;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.google.common.base.Charsets;
@@ -33,6 +33,7 @@ import com.google.common.io.Files;
 import com.thoughtworks.xstream.converters.reflection.FieldDictionary;
 import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 
+import org.catrobat.catroid.CatroidApplication;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.FileChecksumContainer;
@@ -67,7 +68,6 @@ import org.catrobat.catroid.content.bricks.DroneMoveRightBrick;
 import org.catrobat.catroid.content.bricks.DroneMoveUpBrick;
 import org.catrobat.catroid.content.bricks.DronePlayLedAnimationBrick;
 import org.catrobat.catroid.content.bricks.DroneSetConfigBrick;
-import org.catrobat.catroid.content.bricks.DroneSetTextBrick;
 import org.catrobat.catroid.content.bricks.DroneTakeOffLandBrick;
 import org.catrobat.catroid.content.bricks.ForeverBrick;
 import org.catrobat.catroid.content.bricks.FormulaBrick;
@@ -99,6 +99,7 @@ import org.catrobat.catroid.content.bricks.SetBrightnessBrick;
 import org.catrobat.catroid.content.bricks.SetGhostEffectBrick;
 import org.catrobat.catroid.content.bricks.SetLookBrick;
 import org.catrobat.catroid.content.bricks.SetSizeToBrick;
+import org.catrobat.catroid.content.bricks.SetTextBrick;
 import org.catrobat.catroid.content.bricks.SetVariableBrick;
 import org.catrobat.catroid.content.bricks.SetVolumeToBrick;
 import org.catrobat.catroid.content.bricks.SetXBrick;
@@ -160,11 +161,14 @@ public final class StorageHandler {
 
 	private Lock loadSaveLock = new ReentrantLock();
 
+	private static final Context context;
+
 	// TODO: Since the StorageHandler constructor throws an exception, the member INSTANCE couldn't be assigned
 	// directly and therefore we need this static block. Should be refactored and removed in the future.
 	static {
 		try {
 			INSTANCE = new StorageHandler();
+			context = CatroidApplication.getAppContext();
 		} catch (IOException ioException) {
 			throw new RuntimeException("Initialize StorageHandler failed");
 		}
@@ -291,7 +295,7 @@ public final class StorageHandler {
 		xstream.alias("brick", DroneMoveLeftBrick.class);
 		xstream.alias("brick", DroneMoveRightBrick.class);
 		xstream.alias("brick", DroneSetConfigBrick.class);
-		xstream.alias("brick", DroneSetTextBrick.class);
+		xstream.alias("brick", SetTextBrick.class);
 
 		xstream.alias("userBrickElements", UserScriptDefinitionBrickElements.class);
 		xstream.alias("userBrickElement", UserScriptDefinitionBrickElement.class);
@@ -326,7 +330,7 @@ public final class StorageHandler {
 		} catch (Exception exception) {
 			Log.e(TAG, "Loading project " + projectName + " failed.", exception);
 			try {
-				Log.e(TAG, "delete project " + projectName, exception);
+				Log.e(TAG, "delete project .. " + projectName, exception);
 				deleteProject(projectName);
 			} catch (IOException e) {
 				e.printStackTrace();

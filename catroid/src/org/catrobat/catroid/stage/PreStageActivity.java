@@ -40,6 +40,7 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.catrobat.catroid.CatroidApplication;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.bluetooth.BluetoothManager;
@@ -134,8 +135,22 @@ public class PreStageActivity extends BaseActivity {
 		}
 
 		if ((resources & Brick.ARDRONE_SUPPORT) > 0) {
-			droneInitializer = getDroneInitializer();
-			droneInitializer.initialise();
+
+//			WifiManager mainWifiObj;
+//			mainWifiObj = (WifiManager) getSystemService(getBaseContext().WIFI_SERVICE);
+//
+//			Log.d("wifi before", Boolean.toString(mainWifiObj.isWifiEnabled()));
+//			if (!mainWifiObj.isWifiEnabled())
+//			{
+//				mainWifiObj.setWifiEnabled(true);
+//			}
+//			Log.d("wifi after", Boolean.toString(mainWifiObj.isWifiEnabled()));
+
+			CatroidApplication.loadNativeLibs();
+			if(CatroidApplication.parrotLibrariesLoaded){
+				droneInitializer = getDroneInitializer();
+				droneInitializer.initialise();
+			}
 		}
 
 		FaceDetectionHandler.resetFaceDedection();

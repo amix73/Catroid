@@ -43,6 +43,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.google.common.collect.Multimap;
@@ -144,8 +145,6 @@ public class StageListener implements ApplicationListener {
 	public boolean axesOn = false;
 
 	private byte[] thumbnail;
-
-	public static String setdrawText = "";
 
 	StageListener() {
 	}
@@ -416,7 +415,6 @@ public class StageListener implements ApplicationListener {
 			drawText("Surface: " + width + " : " + height, -width / 2, height / 2, 2);
 			drawText("   ARDRONE", width / 6, height / 2-20, 1.5f);
 			drawText("SUPPORTED", width / 6, height / 2-50, 1.5f);
-			drawText(setdrawText, 0,0,2f);
 		}
 	}
 
@@ -644,10 +642,9 @@ public class StageListener implements ApplicationListener {
 		}
 	}
 
-	public void addActor (Look look)
+	public void addActor (Actor actor)
 	{
-		stage.addActor(look);
-
+		stage.addActor(actor);
 	}
 
 	public Stage getStage() {
