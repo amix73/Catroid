@@ -125,15 +125,6 @@ public class PreStageActivity extends BaseActivity {
 			}
 		}
 
-
-		if(resources == 0){
-			Log.d("PreStageActivity", "requiredResources is null!");
-		}
-
-		if(Brick.ARDRONE_SUPPORT == 0){
-			Log.d("PreStageActivity", "ARDRONE_SUPPORT is null!");
-		}
-
 		if ((resources & Brick.ARDRONE_SUPPORT) > 0) {
 
 //			WifiManager mainWifiObj;
